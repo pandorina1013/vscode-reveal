@@ -69,9 +69,11 @@ const renderTemplate = (title: string, revealOptions: IRevealJsOptions, slides: 
               { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
               { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
               { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
-              { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              // { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
               { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-              { src: 'plugin/math/math.js', async: true }
+              { src: 'plugin/math/math.js', async: true },
+              { src: 'https://bnjmnt4n.github.io/reveal-code-focus/vendor/highlight.js/highlight.pack.js' },
+              { src: 'https://unpkg.com/reveal-code-focus@1.0.0/reveal-code-focus.js', async: true, callback: function() { RevealCodeFocus(); } }
             ];
             // default options to init reveal.js
             var defaultOptions = {
