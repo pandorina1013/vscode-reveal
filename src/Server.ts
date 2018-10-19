@@ -64,6 +64,8 @@ export class RevealServer {
     const highlightPath = path.resolve(require.resolve('highlight.js'), '..', '..')
     this.app.use(`/lib/css/`, this.staticDir(path.join(highlightPath, 'styles')))
 
+    this.app.use(`/revealjs-plugins/`, this.staticDir(path.resolve('../revealjs-plugins')))
+
     this.app.get('/', this.renderMarkdownAsSlides)
   }
 

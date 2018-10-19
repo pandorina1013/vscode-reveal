@@ -3,8 +3,9 @@ import md = require('reveal.js/plugin/markdown/markdown')
 import { ExtensionOptions, IRevealJsOptions } from './Models'
 
 export const renderRevealHtml = (title: string, extensionOptions: ExtensionOptions, slidesContent: string) => {
-  const slides = md.slidify(slidesContent, extensionOptions) as string
-  const html = renderTemplate(title, extensionOptions, slides)
+  // const slides = md.slidify(slidesContent, extensionOptions) as string
+  // const html = renderTemplate(title, extensionOptions, slides)
+  const html = renderTemplate(title, extensionOptions, slidesContent)
   return html
 }
 
@@ -45,7 +46,13 @@ const renderTemplate = (title: string, revealOptions: IRevealJsOptions, slides: 
     <body>
 
         <div class="reveal">
-            <div class="slides">${slides}</div>
+            <div class="slides">
+            <section data-markdown data-separator="---">
+                    <script type="text/template">
+                    ${slides}
+                    </script>
+            </section>
+          </div>
         </div>
 
         <script src="lib/js/head.min.js"></script>
@@ -69,12 +76,19 @@ const renderTemplate = (title: string, revealOptions: IRevealJsOptions, slides: 
               { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
               { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
               { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
-              // { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
               { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
               { src: 'plugin/math/math.js', async: true },
-              { src: 'https://bnjmnt4n.github.io/reveal-code-focus/vendor/highlight.js/highlight.pack.js' },
-              { src: 'https://unpkg.com/reveal-code-focus@1.0.0/reveal-code-focus.js', async: true, callback: function() { RevealCodeFocus(); } }
+
+              // { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              // if code focus 
+              { src: 'revealjs-plugins/reveal-code-focus/highlight.pack.js' },
+              { src: 'revealjs-plugins/reveal-code-focus/reveal-code-focus.js', async: true, callback: function() { RevealCodeFocus(); } }
             ];
+
+            
+
+           
+
             // default options to init reveal.js
             var defaultOptions = {
               controls: true,
